@@ -10,16 +10,16 @@ public class Patient {
     private String name;
     private String address;
     private int age;
-    private String date;
+    private String dob;
 
     public Patient(){}
 
-    public Patient(String id, String name, String address, int age, String date) {
+    public Patient(String id, String name, String address, int age, String dob) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.age = age;
-        this.date = date;
+        this.dob = dob;
     }
 
     public String getId() {
@@ -54,11 +54,11 @@ public class Patient {
         this.age = age;
     }
 
-    public String getDate() {
-        return date;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

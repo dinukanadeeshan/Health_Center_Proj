@@ -6,10 +6,20 @@ package com.unicorn.co226.model;
  * dinuka.nadeeshan1993@gmail.com
  */
 public class Student {
+    private Patient patient;
     private String id;
     private String regNo;
     private String faculty;
     private String medical;
+
+
+    public Student(Patient patient, String id, String regNo, String faculty, String medical) {
+        this.patient = patient;
+        this.id = id;
+        this.regNo = regNo;
+        this.faculty = faculty;
+        this.medical = medical;
+    }
 
     public Student(){}
 
@@ -17,6 +27,14 @@ public class Student {
         this.id = id;
         this.regNo = regNo;
         this.faculty = faculty;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Student(String id, String regNo, String faculty, String medical) {
