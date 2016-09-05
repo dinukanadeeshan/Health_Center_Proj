@@ -5,7 +5,10 @@ import com.unicorn.co226.model.Doctor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project - HealthCenterProj
@@ -55,4 +58,16 @@ public class DoctorController {
             connection.setAutoCommit(true);
         }
     }
+
+    public static List<Doctor> getAllDoctors() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM doctor";
+
+        ResultSet rst = DBConnection.getInstance().getConnection().createStatement().executeQuery(query);
+       List<Doctor> doctorList = new ArrayList<Doctor>();
+        while (rst.next()){
+            doctorList.add(new Doctor(rst.getString(1),rst.getString(2)));
+        }
+        return doctorList;
+    }
+
 }

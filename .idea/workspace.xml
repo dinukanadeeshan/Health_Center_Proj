@@ -76,13 +76,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Student.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Student.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="11" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="1088">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="StudentController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="12" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+            <state line="64" column="17" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0" vertical-offset="718" max-vertical-offset="1275">
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1472639263782" expanded="true" signature="484:519" placeholder="INSERT INTO ..." />
+                <marker date="1472750179661" expanded="true" signature="574:609" placeholder="INSERT INTO ..." />
+                <marker date="1472750179661" expanded="true" signature="1823:1938" placeholder="SELECT p.id,..Student..." />
               </folding>
             </state>
           </provider>
@@ -91,12 +101,23 @@
       <file leaf-file-name="DoctorController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/DoctorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="25" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.0" vertical-offset="263" max-vertical-offset="1088">
+            <state line="69" column="26" selection-start="2051" selection-end="2395" vertical-scroll-proportion="0.0" vertical-offset="739" max-vertical-offset="1343">
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1472656058967" expanded="true" signature="614:648" placeholder="INSERT INTO ..." />
-                <marker date="1472656058967" expanded="true" signature="1093:1133" placeholder="INSERT INTO ..." />
+                <element signature="e#2244#2252#0" expanded="true" />
+                <marker date="1472745809883" expanded="true" signature="692:726" placeholder="INSERT INTO ..." />
+                <marker date="1472745809883" expanded="true" signature="1171:1211" placeholder="INSERT INTO ..." />
+                <marker date="1472745809883" expanded="true" signature="2068:2088" placeholder="SELECT * FRO..doctor..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Drug.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Drug.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="44" selection-start="947" selection-end="947" vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="731">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -116,7 +137,7 @@
       <file leaf-file-name="AdmissionController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/AdmissionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="24" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+            <state line="20" column="32" selection-start="860" selection-end="860" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1472658344479" expanded="true" signature="466:549" placeholder="INSERT INTO ..." />
@@ -128,10 +149,12 @@
       <file leaf-file-name="DrugController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/DrugController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="41" selection-start="770" selection-end="770" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+            <state line="35" column="85" selection-start="1302" selection-end="1302" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1472659045227" expanded="true" signature="441:471" placeholder="INSERT INTO ..." />
+                <element signature="e#1179#1185#0" expanded="true" />
+                <marker date="1472746535358" expanded="true" signature="558:588" placeholder="INSERT INTO ..." />
+                <marker date="1472746535358" expanded="true" signature="1008:1026" placeholder="SELECT * FRO..drug..." />
               </folding>
             </state>
           </provider>
@@ -140,7 +163,7 @@
       <file leaf-file-name="ExaminationController.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/ExaminationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="42" selection-start="394" selection-end="394" vertical-scroll-proportion="0.3736842" vertical-offset="42" max-vertical-offset="731">
+            <state line="24" column="49" selection-start="810" selection-end="810" vertical-scroll-proportion="0.7157895" vertical-offset="0" max-vertical-offset="731">
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1472660293884" expanded="true" signature="715:758" placeholder="INSERT INTO ..." />
@@ -172,8 +195,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/main/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Doctor.java" />
-        <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Drug.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Examination.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Treatment.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Admission.java" />
@@ -181,14 +202,16 @@
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Patient.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/PatientController.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Student.java" />
-        <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/StudentController.java" />
-        <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/DoctorController.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/TreatmentController.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/AdmissionController.java" />
-        <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/DrugController.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/ExaminationController.java" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/ui/MainFrame.form" />
         <option value="$PROJECT_DIR$/src/com/unicorn/co226/ui/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Doctor.java" />
+        <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/DoctorController.java" />
+        <option value="$PROJECT_DIR$/src/com/unicorn/co226/model/Drug.java" />
+        <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/DrugController.java" />
+        <option value="$PROJECT_DIR$/src/com/unicorn/co226/controller/StudentController.java" />
       </list>
     </option>
   </component>
@@ -363,6 +386,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="SearchEverywhereHistory" value="" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
@@ -607,16 +635,16 @@
       <updated>1472544449111</updated>
       <workItem from="1472544456904" duration="567000" />
       <workItem from="1472545301668" duration="3396000" />
-      <workItem from="1472636469528" duration="9948000" />
+      <workItem from="1472636469528" duration="16271000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13911000" />
+    <option name="totallyTimeSpent" value="20234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="745" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1621212" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -637,7 +665,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14621212" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14621212" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -677,12 +705,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Student.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="61" selection-start="363" selection-end="363" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1122">
-          <folding>
-            <element signature="e#763#764#0" expanded="true" />
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#840#841#0" expanded="true" />
-            <element signature="e#878#879#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,20 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Doctor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Drug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="62" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="850">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Examination.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="1" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1343">
@@ -787,35 +796,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/PatientController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="50" selection-start="746" selection-end="746" vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="595">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1472637891536" expanded="true" signature="456:493" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="11" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1156">
-          <folding>
-            <element signature="e#763#764#0" expanded="true" />
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#840#841#0" expanded="true" />
-            <element signature="e#878#879#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Patient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="22" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="850">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/TreatmentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="20" selection-start="803" selection-end="803" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
@@ -826,30 +806,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/DoctorController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="25" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.0" vertical-offset="263" max-vertical-offset="1088">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1472656058967" expanded="true" signature="614:648" placeholder="INSERT INTO ..." />
-            <marker date="1472656058967" expanded="true" signature="1093:1133" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/StudentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="12" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1472639263782" expanded="true" signature="484:519" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/AdmissionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="24" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+        <state line="20" column="32" selection-start="860" selection-end="860" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1472658344479" expanded="true" signature="466:549" placeholder="INSERT INTO ..." />
@@ -857,19 +816,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/DrugController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Drug.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="41" selection-start="770" selection-end="770" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+        <state line="46" column="44" selection-start="947" selection-end="947" vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Doctor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="43" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="1020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/DoctorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="26" selection-start="2051" selection-end="2395" vertical-scroll-proportion="0.0" vertical-offset="739" max-vertical-offset="1343">
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1472659045227" expanded="true" signature="441:471" placeholder="INSERT INTO ..." />
+            <element signature="e#2244#2252#0" expanded="true" />
+            <marker date="1472745809883" expanded="true" signature="692:726" placeholder="INSERT INTO ..." />
+            <marker date="1472745809883" expanded="true" signature="1171:1211" placeholder="INSERT INTO ..." />
+            <marker date="1472745809883" expanded="true" signature="2068:2088" placeholder="SELECT * FRO..doctor..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/PatientController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="50" selection-start="746" selection-end="746" vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="595">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1472637891536" expanded="true" signature="456:493" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Patient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="22" selection-start="291" selection-end="291" vertical-scroll-proportion="0.27017543" vertical-offset="50" max-vertical-offset="850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/model/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="11" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/StudentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="17" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0" vertical-offset="718" max-vertical-offset="1275">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1472750179661" expanded="true" signature="574:609" placeholder="INSERT INTO ..." />
+            <marker date="1472750179661" expanded="true" signature="1823:1938" placeholder="SELECT p.id,..Student..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/DrugController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="85" selection-start="1302" selection-end="1302" vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="799">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1179#1185#0" expanded="true" />
+            <marker date="1472746535358" expanded="true" signature="558:588" placeholder="INSERT INTO ..." />
+            <marker date="1472746535358" expanded="true" signature="1008:1026" placeholder="SELECT * FRO..drug..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/unicorn/co226/controller/ExaminationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="42" selection-start="394" selection-end="394" vertical-scroll-proportion="0.3736842" vertical-offset="42" max-vertical-offset="731">
+        <state line="24" column="49" selection-start="810" selection-end="810" vertical-scroll-proportion="0.7157895" vertical-offset="0" max-vertical-offset="731">
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1472660293884" expanded="true" signature="715:758" placeholder="INSERT INTO ..." />

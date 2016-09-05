@@ -14,6 +14,11 @@ public class Doctor {
 
     public Doctor(){}
 
+    public Doctor(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Doctor(String id, String name, String address, String type, String[] tele) {
         this.id = id;
         this.name = name;
@@ -60,5 +65,10 @@ public class Doctor {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return id+" "+name;
     }
 }

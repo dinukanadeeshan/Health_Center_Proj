@@ -1,10 +1,14 @@
 package com.unicorn.co226.controller;
 
 import com.unicorn.co226.db.DBConnection;
+import com.unicorn.co226.model.Doctor;
 import com.unicorn.co226.model.Drug;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project - HealthCenterProj
@@ -22,4 +26,16 @@ public class DrugController {
 
         return statement.executeUpdate();
     }
+
+    public static List<Drug> getAllDrugs() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM drug";
+
+        ResultSet rst = DBConnection.getInstance().getConnection().createStatement().executeQuery(query);
+        List<Drug> drugList = new ArrayList<Drug>();
+        while (rst.next()){
+            drugList.add(new Drug(rst.getString(1), rst.getString(2), rst.getString(3)));
+        }
+        return drugList;
+    }
+
 }

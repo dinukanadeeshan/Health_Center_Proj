@@ -1,11 +1,14 @@
 package com.unicorn.co226.controller;
 
 import com.unicorn.co226.db.DBConnection;
+import com.unicorn.co226.model.Patient;
 import com.unicorn.co226.model.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Project - HealthCenterProj
@@ -53,4 +56,14 @@ public class StudentController {
 
     }
 
+    public static Student getStudentByRegNo(String regNo) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT p.id, name, address , dob, regNo, faculty, medical FROM Student s, Patient p where s.id = p.id and regNo = ?";
+        PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
+        statement.setString(1,regNo);
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()){
+            return new Student(new Patient(rst.getString(1),rst.getString(2),rst.getString(3),0,rst.getString(4)),rst.getString(1),rst.getString(5),rst.getString(6),rst.getString(7));
+        }
+        return null;
+    }
 }
