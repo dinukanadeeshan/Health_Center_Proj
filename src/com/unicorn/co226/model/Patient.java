@@ -14,6 +14,14 @@ public class Patient {
 
     public Patient(){}
 
+    public Patient(String id, String name, String address, String dob) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.dob = dob;
+    }
+
+    
     public Patient(String id, String name, String address, int age, String dob) {
         this.id = id;
         this.name = name;

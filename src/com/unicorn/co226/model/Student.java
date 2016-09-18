@@ -10,10 +10,10 @@ public class Student {
     private String id;
     private String regNo;
     private String faculty;
-    private String medical;
+    private int medical;
 
 
-    public Student(Patient patient, String id, String regNo, String faculty, String medical) {
+    public Student(Patient patient, String id, String regNo, String faculty, int medical) {
         this.patient = patient;
         this.id = id;
         this.regNo = regNo;
@@ -29,6 +29,13 @@ public class Student {
         this.faculty = faculty;
     }
 
+    public Student(Patient patient, String regNo, String faculty, int medical) {
+        this.patient = patient;
+        this.regNo = regNo;
+        this.faculty = faculty;
+        this.medical = medical;
+    }
+
     public Patient getPatient() {
         return patient;
     }
@@ -37,7 +44,7 @@ public class Student {
         this.patient = patient;
     }
 
-    public Student(String id, String regNo, String faculty, String medical) {
+    public Student(String id, String regNo, String faculty, int medical) {
         this.id = id;
         this.regNo = regNo;
         this.faculty = faculty;
@@ -68,11 +75,11 @@ public class Student {
         this.faculty = faculty;
     }
 
-    public String getMedical() {
+    public int getMedical() {
         return medical;
     }
 
-    public void setMedical(String medical) {
+    public void setMedical(int medical) {
         this.medical = medical;
     }
 }
