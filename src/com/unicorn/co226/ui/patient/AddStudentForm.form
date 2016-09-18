@@ -67,11 +67,9 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="nameText" pref="352" max="32767" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="dobDatePicker" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="regNoTextField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="facultyComboBox" alignment="0" pref="234" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="dobDatePicker" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="regNoTextField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="facultyComboBox" alignment="0" pref="352" max="32767" attributes="0"/>
                                       <Component id="idTextField" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="addressTextField" alignment="1" min="-2" pref="352" max="-2" attributes="0"/>
