@@ -431,6 +431,7 @@ public class ExaminationForm extends javax.swing.JDialog {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
+        System.out.println("Test");
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
