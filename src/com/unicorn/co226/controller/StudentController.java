@@ -22,10 +22,10 @@ public class StudentController {
         con.setAutoCommit(false);
 
         PreparedStatement pre_stm = con.prepareStatement(query);
-        pre_stm.setString(1,student.getId());
+        pre_stm.setString(1,student.getPatient().getId());
         pre_stm.setString(2,student.getRegNo());
         pre_stm.setString(3,student.getFaculty());
-        pre_stm.setString(4,student.getMedical());
+        pre_stm.setInt(4,student.getMedical());
 
         try{
             if (student.getPatient() != null){
@@ -56,13 +56,18 @@ public class StudentController {
 
     }
 
-    public static Student getStudentByRegNo(String regNo) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT p.id, name, address , dob, regNo, faculty, medical FROM Student s, Patient p where s.id = p.id and regNo = ?";
-        PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
+    public static Student getStudentByRegNo(String regNo) throws SQLException,
+                                                        ClassNotFoundException {
+        String sql = "SELECT p.id, name, address , dob, regNo, faculty, medical"
+                + " FROM Student s, Patient p where s.id = p.id and regNo = ?";
+        PreparedStatement statement;
+        statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
         statement.setString(1,regNo);
         ResultSet rst = statement.executeQuery();
         if (rst.next()){
-            return new Student(new Patient(rst.getString(1),rst.getString(2),rst.getString(3),0,rst.getString(4)),rst.getString(1),rst.getString(5),rst.getString(6),rst.getString(7));
+            return new Student(new Patient(rst.getString(1),rst.getString(2),
+                    rst.getString(3),0,rst.getString(4)),rst.getString(1),
+                    rst.getString(5),rst.getString(6),rst.getInt(7));
         }
         return null;
     }

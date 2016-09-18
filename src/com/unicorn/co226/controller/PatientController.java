@@ -13,14 +13,14 @@ import java.sql.SQLException;
  */
 public class PatientController {
     public static int addPatient(Patient patient) throws SQLException, ClassNotFoundException {
-        String query = "INSERT INTO patient values(?,?,?,?,?)";
+        String query = "INSERT INTO patient values(?,?,?,year(now()) - year(?),?)";
 
         PreparedStatement pre_stm = DBConnection.getInstance().getConnection().prepareStatement(query);
 
         pre_stm.setString(1,patient.getId());
         pre_stm.setString(2,patient.getName());
         pre_stm.setString(3,patient.getAddress());
-        pre_stm.setInt(4, patient.getAge());
+        pre_stm.setString(4, patient.getDob());
         pre_stm.setString(5,patient.getDob()); 
         
         return pre_stm.executeUpdate();
