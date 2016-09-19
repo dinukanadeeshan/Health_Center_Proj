@@ -5,18 +5,42 @@
  */
 package com.unicorn.co226.ui;
 
+import com.unicorn.co226.controller.StudentController;
+import com.unicorn.co226.model.Student;
+import com.unicorn.co226.model.WaitingListItem;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+
 /**
  *
  * @author Sithara
  */
 public class WaitingList extends javax.swing.JDialog {
 
+    private Student student;
+    private DefaultListModel<WaitingListItem> waitingListModel;
+    private int urgentCount;
+
     /**
      * Creates new form WaitingList
+     * @param parent
+     * @param modal
      */
     public WaitingList(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        waitingListModel = new DefaultListModel();
+        waitingList.setModel(waitingListModel);
+        waitingList.setCellRenderer(new WaitingListCellRenderer());
     }
 
     /**
@@ -34,23 +58,22 @@ public class WaitingList extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        waitingList = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         regNumberLbl = new javax.swing.JLabel();
-        registerTxt = new javax.swing.JTextField();
         studentNameLbl = new javax.swing.JLabel();
         studentNameTxt = new javax.swing.JTextField();
         facultyLbl = new javax.swing.JLabel();
         facultyTxt = new javax.swing.JTextField();
         feverBtn = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        yesFeverRdBtn = new javax.swing.JRadioButton();
+        noFeverRdBtn = new javax.swing.JRadioButton();
         preDiesesBtn = new javax.swing.JLabel();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         conditionLbl = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        normalRdBtn = new javax.swing.JRadioButton();
+        urgentRdBtn = new javax.swing.JRadioButton();
         commentLbl = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         commentBtn = new javax.swing.JTextArea();
@@ -59,6 +82,7 @@ public class WaitingList extends javax.swing.JDialog {
         editBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
+        registerTxt = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,29 +94,33 @@ public class WaitingList extends javax.swing.JDialog {
         jLabel1.setText("  Waiting List");
         jLabel1.setOpaque(true);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(waitingList);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        regNumberLbl.setBackground(new java.awt.Color(255, 102, 102));
         regNumberLbl.setText("Registration Number");
 
+        studentNameLbl.setBackground(new java.awt.Color(255, 153, 102));
         studentNameLbl.setText("Student Name");
+
+        studentNameTxt.setEditable(false);
+        studentNameTxt.setBackground(new java.awt.Color(255, 255, 255));
 
         facultyLbl.setText("Faculty");
 
+        facultyTxt.setEditable(false);
+        facultyTxt.setBackground(new java.awt.Color(255, 255, 255));
+
         feverBtn.setText("Fever Condition ");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("YES");
+        buttonGroup1.add(yesFeverRdBtn);
+        yesFeverRdBtn.setText("YES");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("NO");
+        buttonGroup1.add(noFeverRdBtn);
+        noFeverRdBtn.setSelected(true);
+        noFeverRdBtn.setText("NO");
 
         preDiesesBtn.setText("Pre Diceases");
 
@@ -104,11 +132,12 @@ public class WaitingList extends javax.swing.JDialog {
 
         conditionLbl.setText("Condition");
 
-        buttonGroup3.add(jRadioButton5);
-        jRadioButton5.setText("Normal");
+        buttonGroup3.add(normalRdBtn);
+        normalRdBtn.setSelected(true);
+        normalRdBtn.setText("Normal");
 
-        buttonGroup3.add(jRadioButton6);
-        jRadioButton6.setText("Urgent");
+        buttonGroup3.add(urgentRdBtn);
+        urgentRdBtn.setText("Urgent");
 
         commentLbl.setText("Comments");
 
@@ -127,6 +156,11 @@ public class WaitingList extends javax.swing.JDialog {
 
         addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Button-Add-icon.png"))); // NOI18N
         addBtn.setText("ADD");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Clear-icon.png"))); // NOI18N
         clearBtn.setText("CLEAR");
@@ -158,6 +192,17 @@ public class WaitingList extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        try {
+            registerTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("U-##-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        registerTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerTxtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -178,28 +223,27 @@ public class WaitingList extends javax.swing.JDialog {
                                     .addComponent(preDiesesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(conditionLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton5)
+                                        .addComponent(normalRdBtn)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton6))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(registerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(studentNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                                        .addComponent(facultyTxt))
+                                        .addComponent(urgentRdBtn))
+                                    .addComponent(studentNameTxt)
+                                    .addComponent(facultyTxt)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jRadioButton3)
-                                            .addComponent(jRadioButton1))
+                                            .addComponent(yesFeverRdBtn))
                                         .addGap(29, 29, 29)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRadioButton2)
-                                            .addComponent(jRadioButton4)))))
+                                            .addComponent(noFeverRdBtn)
+                                            .addComponent(jRadioButton4)))
+                                    .addComponent(registerTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(commentLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(43, 43, 43))
         );
         jPanel2Layout.setVerticalGroup(
@@ -207,8 +251,8 @@ public class WaitingList extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(regNumberLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(regNumberLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(studentNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,8 +264,8 @@ public class WaitingList extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(feverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(yesFeverRdBtn)
+                    .addComponent(noFeverRdBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(preDiesesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,8 +273,8 @@ public class WaitingList extends javax.swing.JDialog {
                     .addComponent(jRadioButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jRadioButton5)
+                    .addComponent(urgentRdBtn)
+                    .addComponent(normalRdBtn)
                     .addComponent(conditionLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,8 +293,8 @@ public class WaitingList extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
@@ -277,6 +321,30 @@ public class WaitingList extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        if (student != null) {
+            WaitingListItem waitingListItem = new WaitingListItem(student, yesFeverRdBtn.isSelected(), urgentRdBtn.isSelected());
+            if (urgentRdBtn.isSelected()) {
+                waitingListModel.add(urgentCount, waitingListItem);
+            } else {
+                waitingListModel.addElement(waitingListItem);
+            }
+            clearForm();
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void registerTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTxtActionPerformed
+        try {
+            student = StudentController.getStudentByRegNo(registerTxt.getText());
+            studentNameTxt.setText(student.getPatient().getName());
+            facultyTxt.setText(student.getFaculty());
+        } catch (SQLException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_registerTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,17 +374,15 @@ public class WaitingList extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                WaitingList dialog = new WaitingList(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            WaitingList dialog = new WaitingList(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
@@ -335,22 +401,61 @@ public class WaitingList extends javax.swing.JDialog {
     private javax.swing.JTextField facultyTxt;
     private javax.swing.JLabel feverBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton noFeverRdBtn;
+    private javax.swing.JRadioButton normalRdBtn;
     private javax.swing.JLabel preDiesesBtn;
     private javax.swing.JLabel regNumberLbl;
-    private javax.swing.JTextField registerTxt;
+    private javax.swing.JFormattedTextField registerTxt;
     private javax.swing.JLabel studentNameLbl;
     private javax.swing.JTextField studentNameTxt;
+    private javax.swing.JRadioButton urgentRdBtn;
+    private javax.swing.JList waitingList;
+    private javax.swing.JRadioButton yesFeverRdBtn;
     // End of variables declaration//GEN-END:variables
+
+    private void clearForm() {
+        registerTxt.setText("");
+        student = null;
+        studentNameTxt.setText("");
+        facultyTxt.setText("");
+        noFeverRdBtn.setSelected(true);
+        normalRdBtn.setSelected(true);
+    }
+
+    private class WaitingListCellRenderer extends DefaultListCellRenderer {
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+//            JLabel cell = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus); //To change body of generated methods, choose Tools | Templates.
+            JLabel cell = new JLabel();
+            cell.setPreferredSize(new Dimension(25, 30));
+            cell.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            cell.setOpaque(true);
+            if (value instanceof WaitingListItem) {
+                WaitingListItem item = (WaitingListItem) value;
+                if (item.hasFever()) {
+                    cell.setBackground(new Color(255, 153, 102));
+                }
+
+                if (item.isUrgent()) {
+                    cell.setBackground(new Color(255, 102, 102));
+                }
+                cell.setText(value.toString());
+            }
+            if (index % 2 == 0) {
+                cell.setForeground(Color.darkGray);
+            }
+            //else cell.setForeground(Color.red);
+            return cell;
+
+        }
+
+    }
 }
