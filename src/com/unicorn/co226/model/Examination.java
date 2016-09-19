@@ -1,5 +1,7 @@
 package com.unicorn.co226.model;
 
+import java.util.ArrayList;
+
 /**
  * Project - HealthCenterProj
  * Created by Dinuka Nadeeshan on 8/30/16.
@@ -12,7 +14,28 @@ public class Examination {
     private String examination_date;
     private String disease_description;
     private String doctor_decision;
+    private ArrayList<Treatment> treatments;
 
+    public Examination(String id, String doctor_id, String patient_id, String examination_date, String disease_description, String doctor_decision, ArrayList<Treatment> treatments) {
+        this.id = id;
+        this.doctor_id = doctor_id;
+        this.patient_id = patient_id;
+        this.examination_date = examination_date;
+        this.disease_description = disease_description;
+        this.doctor_decision = doctor_decision;
+        this.treatments = treatments;
+    }
+
+    public ArrayList<Treatment> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(ArrayList<Treatment> treatments) {
+        this.treatments = treatments;
+    }
+    
+    
+    
     public Examination(String id, String doctor_id, String patient_id, String examination_date, String disease_description, String doctor_decision) {
         this.id = id;
         this.doctor_id = doctor_id;

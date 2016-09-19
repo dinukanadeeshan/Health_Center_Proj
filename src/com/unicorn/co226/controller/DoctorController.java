@@ -69,5 +69,16 @@ public class DoctorController {
         }
         return doctorList;
     }
+    
+    public static Doctor getDoctor(String id) throws SQLException, ClassNotFoundException{
+        String query = "SELECT * FROM doctor WHERE id = '"+id+"'";
+
+        ResultSet rst = DBConnection.getInstance().getConnection().createStatement().executeQuery(query);
+       
+       if (rst.next()){
+         return   new Doctor(rst.getString(1),rst.getString(2));
+        }
+       return null;
+    }
 
 }

@@ -9,15 +9,15 @@ public class Treatment {
     private String drug_id;
     private String examination_id;
     private String dosage;
-    private String duration;
+   // private String duration;
 
     public Treatment(){}
 
-    public Treatment(String drug_id, String examination_id, String dosage, String duration) {
+    public Treatment(String drug_id, String examination_id, String dosage) {
         this.drug_id = drug_id;
         this.examination_id = examination_id;
         this.dosage = dosage;
-        this.duration = duration;
+       // this.duration = duration;
     }
 
     public String getDrug_id() {
@@ -44,11 +44,11 @@ public class Treatment {
         this.dosage = dosage;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
+//    public String getDuration() {
+//        return duration;
+//    }
+//
+//    public void setDuration(String duration) {
+//        this.duration = duration;
+//    }
 }

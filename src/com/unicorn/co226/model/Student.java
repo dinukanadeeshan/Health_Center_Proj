@@ -82,4 +82,10 @@ public class Student {
     public void setMedical(int medical) {
         this.medical = medical;
     }
+
+    @Override
+    public String toString() {
+        return regNo+" - "+patient.getName();
+    }
+    
 }

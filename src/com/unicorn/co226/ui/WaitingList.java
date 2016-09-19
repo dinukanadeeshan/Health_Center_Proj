@@ -6,6 +6,7 @@
 package com.unicorn.co226.ui;
 
 import com.unicorn.co226.controller.StudentController;
+import com.unicorn.co226.model.Doctor;
 import com.unicorn.co226.model.Student;
 import com.unicorn.co226.model.WaitingListItem;
 import java.awt.Color;
@@ -27,6 +28,7 @@ import javax.swing.JList;
 public class WaitingList extends javax.swing.JDialog {
 
     private Student student;
+    private Doctor doctor;
     private DefaultListModel<WaitingListItem> waitingListModel;
     private int urgentCount;
 
@@ -37,6 +39,14 @@ public class WaitingList extends javax.swing.JDialog {
      */
     public WaitingList(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
+        waitingListModel = new DefaultListModel();
+        waitingList.setModel(waitingListModel);
+        waitingList.setCellRenderer(new WaitingListCellRenderer());
+    }
+    public WaitingList(java.awt.Frame parent, boolean modal,Doctor doc) {
+        super(parent, modal);
+        doctor = doc;
         initComponents();
         waitingListModel = new DefaultListModel();
         waitingList.setModel(waitingListModel);
@@ -94,6 +104,11 @@ public class WaitingList extends javax.swing.JDialog {
         jLabel1.setText("  Waiting List");
         jLabel1.setOpaque(true);
 
+        waitingList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                waitingListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(waitingList);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -346,6 +361,13 @@ public class WaitingList extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_registerTxtActionPerformed
 
+    private void waitingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_waitingListMouseClicked
+        if (evt.getClickCount() == 2) {
+            Student st = ((WaitingListItem)waitingList.getSelectedValue()).getStudent();
+            
+        }
+    }//GEN-LAST:event_waitingListMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -433,8 +455,8 @@ public class WaitingList extends javax.swing.JDialog {
 
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-//            JLabel cell = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus); //To change body of generated methods, choose Tools | Templates.
-            JLabel cell = new JLabel();
+            JLabel cell = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus); //To change body of generated methods, choose Tools | Templates.
+           // JLabel cell = new JLabel();
             cell.setPreferredSize(new Dimension(25, 30));
             cell.setFont(new Font("Tahoma", Font.PLAIN, 15));
             cell.setOpaque(true);
