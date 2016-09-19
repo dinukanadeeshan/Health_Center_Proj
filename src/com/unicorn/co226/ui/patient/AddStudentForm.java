@@ -49,7 +49,7 @@ public class AddStudentForm extends javax.swing.JDialog {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         initComponents();
         setLocationRelativeTo(parent);
-
+        medicalPhotos = new File[]{};
         maskFormatterMap = new HashMap<>();
 
         try {

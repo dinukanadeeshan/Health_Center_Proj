@@ -23,6 +23,7 @@ public class SetUserNamePassword extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**

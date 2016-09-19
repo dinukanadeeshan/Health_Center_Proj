@@ -7,12 +7,15 @@ package com.unicorn.co226.ui;
 
 import com.unicorn.co226.controller.StudentController;
 import com.unicorn.co226.model.Doctor;
+import com.unicorn.co226.model.Examination;
 import com.unicorn.co226.model.Student;
 import com.unicorn.co226.model.WaitingListItem;
+import com.unicorn.co226.ui.examination.ExaminationForm;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +23,9 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -31,7 +37,7 @@ public class WaitingList extends javax.swing.JDialog {
     private Doctor doctor;
     private DefaultListModel<WaitingListItem> waitingListModel;
     private int urgentCount;
-
+    private Frame parent;
     /**
      * Creates new form WaitingList
      * @param parent
@@ -39,7 +45,9 @@ public class WaitingList extends javax.swing.JDialog {
      */
     public WaitingList(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
+        setLocationRelativeTo(null);
         waitingListModel = new DefaultListModel();
         waitingList.setModel(waitingListModel);
         waitingList.setCellRenderer(new WaitingListCellRenderer());
@@ -47,7 +55,19 @@ public class WaitingList extends javax.swing.JDialog {
     public WaitingList(java.awt.Frame parent, boolean modal,Doctor doc) {
         super(parent, modal);
         doctor = doc;
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        setLocationRelativeTo(null);
         waitingListModel = new DefaultListModel();
         waitingList.setModel(waitingListModel);
         waitingList.setCellRenderer(new WaitingListCellRenderer());
@@ -352,6 +372,10 @@ public class WaitingList extends javax.swing.JDialog {
     private void registerTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTxtActionPerformed
         try {
             student = StudentController.getStudentByRegNo(registerTxt.getText());
+            if (student == null) {
+                JOptionPane.showMessageDialog(this, "No student found in database");
+                return ;
+            }
             studentNameTxt.setText(student.getPatient().getName());
             facultyTxt.setText(student.getFaculty());
         } catch (SQLException ex) {
@@ -364,6 +388,8 @@ public class WaitingList extends javax.swing.JDialog {
     private void waitingListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_waitingListMouseClicked
         if (evt.getClickCount() == 2) {
             Student st = ((WaitingListItem)waitingList.getSelectedValue()).getStudent();
+            new ExaminationForm(parent, true, st, doctor).setVisible(true);
+            //waitingList.remove(0);
             
         }
     }//GEN-LAST:event_waitingListMouseClicked

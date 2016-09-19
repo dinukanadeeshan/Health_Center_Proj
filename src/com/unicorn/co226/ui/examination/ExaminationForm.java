@@ -13,6 +13,7 @@ import com.unicorn.co226.model.Examination;
 import com.unicorn.co226.model.Student;
 import com.unicorn.co226.model.Treatment;
 import com.unicorn.co226.other.IdGen;
+import com.unicorn.co226.ui.WaitingList;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,10 +42,21 @@ public class ExaminationForm extends javax.swing.JDialog {
      */
     public ExaminationForm(java.awt.Frame parent, boolean modal, Student student,Doctor doctor) {
         super(parent, modal);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         this.student = student;
         this.doctor = doctor;
-        
+        setLocationRelativeTo(null);
         try {
             studentText.setText(student.toString());
             doctorText.setText(doctor.toString());
@@ -67,7 +79,7 @@ public class ExaminationForm extends javax.swing.JDialog {
         historyTableModel = (DefaultTableModel) histryTable.getModel();
         
         try {
-            ArrayList<String[]> history = ExaminationController.getExaminationForPatient(studentText.getText());
+            ArrayList<String[]> history = ExaminationController.getExaminationForPatient(student.getId());
             for (String[] row : history) {
                 historyTableModel.addRow(row);
             }

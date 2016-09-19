@@ -27,7 +27,7 @@ public class AddDoctorForm extends javax.swing.JDialog {
         super(parent, modal);
         this.parent = parent;
         initComponents();
-        
+        setLocationRelativeTo(null);
         try {
             idText.setText(IdGen.getNextId("Doctor", "id", "D"));
         } catch (ClassNotFoundException ex) {
