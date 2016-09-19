@@ -9,6 +9,7 @@ import com.unicorn.co226.controller.StudentController;
 import com.unicorn.co226.model.Patient;
 import com.unicorn.co226.model.Student;
 import com.unicorn.co226.other.IdGen;
+import com.unicorn.co226.ui.WaitingList;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +46,17 @@ public class AddStudentForm extends javax.swing.JDialog {
      */
     public AddStudentForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.parent = parent;
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         initComponents();

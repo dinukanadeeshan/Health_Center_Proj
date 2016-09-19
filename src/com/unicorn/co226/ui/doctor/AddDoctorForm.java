@@ -8,10 +8,13 @@ package com.unicorn.co226.ui.doctor;
 import com.unicorn.co226.controller.DoctorController;
 import com.unicorn.co226.model.Doctor;
 import com.unicorn.co226.other.IdGen;
+import com.unicorn.co226.ui.WaitingList;
 import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -25,6 +28,17 @@ public class AddDoctorForm extends javax.swing.JDialog {
      */
     public AddDoctorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);

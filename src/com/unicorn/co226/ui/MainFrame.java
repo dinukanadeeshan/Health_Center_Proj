@@ -7,6 +7,7 @@ package com.unicorn.co226.ui;
 
 import com.unicorn.co226.controller.UserAsDoctorController;
 import com.unicorn.co226.model.User;
+import com.unicorn.co226.ui.drug.AddDrugForm;
 import com.unicorn.co226.ui.patient.AddStudentForm;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -133,6 +134,11 @@ public class MainFrame extends javax.swing.JFrame {
         addDoctorBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/doctor.jpg"))); // NOI18N
         addDoctorBtn.setText(" Doctor");
         addDoctorBtn.setOpaque(false);
+        addDoctorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctorBtnActionPerformed(evt);
+            }
+        });
 
         registerStudentBtn.setBackground(new java.awt.Color(0, 102, 153));
         registerStudentBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -254,8 +260,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_waitingListBtn1ActionPerformed
 
     private void addMedicineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedicineBtnActionPerformed
-        // TODO add your handling code here:
+        new AddDrugForm(this, true).setVisible(true);
     }//GEN-LAST:event_addMedicineBtnActionPerformed
+
+    private void addDoctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorBtnActionPerformed
+        new AddStudentForm(this, true).setVisible(true);
+    }//GEN-LAST:event_addDoctorBtnActionPerformed
 
     /**
      * @param args the command line arguments

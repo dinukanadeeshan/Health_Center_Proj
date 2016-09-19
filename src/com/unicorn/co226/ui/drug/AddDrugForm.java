@@ -8,6 +8,7 @@ package com.unicorn.co226.ui.drug;
 import com.unicorn.co226.controller.DrugController;
 import com.unicorn.co226.model.Drug;
 import com.unicorn.co226.other.IdGen;
+import com.unicorn.co226.ui.WaitingList;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -30,6 +31,17 @@ public class AddDrugForm extends javax.swing.JDialog {
      */
     public AddDrugForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         try {
             idTextField.setText(curId = IdGen.getNextId("Drug", "id", "D"));

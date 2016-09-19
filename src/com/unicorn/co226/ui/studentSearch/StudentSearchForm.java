@@ -5,6 +5,7 @@
  */
 package com.unicorn.co226.ui.studentSearch;
 
+import com.unicorn.co226.ui.WaitingList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -21,6 +22,17 @@ public class StudentSearchForm extends javax.swing.JDialog {
      */
     public StudentSearchForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(WaitingList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
     }
 
