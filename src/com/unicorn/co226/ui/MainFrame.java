@@ -5,20 +5,22 @@
  */
 package com.unicorn.co226.ui;
 
+import com.unicorn.co226.model.User;
 import com.unicorn.co226.ui.patient.AddStudentForm;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 /**
  *
  * @author HP
  */
 public class MainFrame extends javax.swing.JFrame {
+    private final User user;
 
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame(User user) {
+        this.user = user;
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -221,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame(new User()).setVisible(true);
             }
         });
     }

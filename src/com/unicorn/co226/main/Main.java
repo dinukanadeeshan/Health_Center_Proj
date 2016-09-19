@@ -1,5 +1,7 @@
 package com.unicorn.co226.main;
 
+import com.unicorn.co226.ui.LogInForum;
+
 /**
  * Project - HealthCenterProj
  * Created by Dinuka Nadeeshan on 8/30/16.
@@ -7,6 +9,6 @@ package com.unicorn.co226.main;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Initial State...");
+        new LogInForum(null, true).setVisible(true);
     }
 }

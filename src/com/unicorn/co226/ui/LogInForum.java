@@ -5,8 +5,12 @@
  */
 package com.unicorn.co226.ui;
 
+import com.unicorn.co226.controller.UserController;
+import com.unicorn.co226.model.User;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -22,6 +26,7 @@ public class LogInForum extends javax.swing.JDialog {
     public LogInForum(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         setResizable(false);
     }
 
@@ -78,6 +83,11 @@ public class LogInForum extends javax.swing.JDialog {
         logInButton.setBackground(new java.awt.Color(204, 204, 255));
         logInButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         logInButton.setText("Log In");
+        logInButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logInButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setBackground(new java.awt.Color(204, 204, 255));
         cancelButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -127,11 +137,11 @@ public class LogInForum extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logInButton)
                     .addComponent(cancelButton))
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,6 +161,25 @@ public class LogInForum extends javax.swing.JDialog {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void logInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInButtonActionPerformed
+        try {
+            User user = new User(userNameText.getText(), passwordText.getText());
+            
+            if(UserController.authUser(user)) {
+                dispose();
+                new MainFrame(user).setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Invalid user name or password");
+                passwordText.setText("");
+                userNameText.requestFocus();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogInForum.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogInForum.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_logInButtonActionPerformed
 
     /**
      * @param args the command line arguments

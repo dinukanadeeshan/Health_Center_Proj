@@ -5,18 +5,37 @@
  */
 package com.unicorn.co226.ui.doctor;
 
+import com.unicorn.co226.controller.DoctorController;
+import com.unicorn.co226.model.Doctor;
+import com.unicorn.co226.other.IdGen;
+import java.awt.Frame;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author yeshan
  */
 public class AddDoctorForm extends javax.swing.JDialog {
 
+    private Frame parent;
     /**
      * Creates new form AddDoctorForm
      */
     public AddDoctorForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
+        
+        try {
+            idText.setText(IdGen.getNextId("Doctor", "id", "D"));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddDoctorForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddDoctorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -42,6 +61,7 @@ public class AddDoctorForm extends javax.swing.JDialog {
         doctorTelephone2 = new javax.swing.JTextField();
         doctorCancelButton = new javax.swing.JButton();
         doctorSaveButton = new javax.swing.JButton();
+        idText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -106,6 +126,13 @@ public class AddDoctorForm extends javax.swing.JDialog {
         doctorSaveButton.setBackground(new java.awt.Color(204, 204, 255));
         doctorSaveButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         doctorSaveButton.setText("Save");
+        doctorSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorSaveButtonActionPerformed(evt);
+            }
+        });
+
+        idText.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,14 +150,14 @@ public class AddDoctorForm extends javax.swing.JDialog {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(doctorNameText)
-                        .addComponent(doctorAddressText, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(doctorNameText)
+                    .addComponent(doctorAddressText, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .addComponent(doctorTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(doctorTelephone2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                        .addComponent(doctorTelephone1, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(doctorTelephone1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(idText))
                 .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -144,7 +171,9 @@ public class AddDoctorForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -163,7 +192,7 @@ public class AddDoctorForm extends javax.swing.JDialog {
                     .addComponent(doctorTelephone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doctorTelephone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(doctorCancelButton)
                     .addComponent(doctorSaveButton))
@@ -191,6 +220,24 @@ public class AddDoctorForm extends javax.swing.JDialog {
     private void doctorCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorCancelButtonActionPerformed
         dispose();
     }//GEN-LAST:event_doctorCancelButtonActionPerformed
+
+    private void doctorSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorSaveButtonActionPerformed
+        Doctor doctor = new Doctor(idText.getText(), doctorNameText.getText(), doctorAddressText.getText(),
+                doctorTypeBox.getSelectedItem().toString(),
+                new String[]{doctorTelephone1.getText(),doctorTelephone2.getText()});
+        
+        try {
+            int res = DoctorController.addDoctor(doctor);
+            if (res > 0) {
+                dispose();
+                new AddDoctorForm(parent, true).setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddDoctorForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddDoctorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_doctorSaveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +289,7 @@ public class AddDoctorForm extends javax.swing.JDialog {
     private javax.swing.JTextField doctorTelephone1;
     private javax.swing.JTextField doctorTelephone2;
     private javax.swing.JComboBox doctorTypeBox;
+    private javax.swing.JTextField idText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

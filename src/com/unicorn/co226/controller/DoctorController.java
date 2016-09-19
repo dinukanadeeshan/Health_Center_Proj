@@ -29,8 +29,10 @@ public class DoctorController {
 
             int res = pre_stm.executeUpdate();
             if (res > 0) {
+                 query = "INSERT INTO doctor_telephone VALUES(?,?)";
+                 pre_stm = connection.prepareStatement(query);
                 for (String tele:doctor.getTele()) {
-                    query = "INSERT INTO doctor_telephone VALUES(?,?)";
+                   
                     pre_stm.setString(1,doctor.getId());
                     pre_stm.setString(2,tele);
                     pre_stm.addBatch();
