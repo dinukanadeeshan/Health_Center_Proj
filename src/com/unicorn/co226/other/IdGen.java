@@ -21,33 +21,37 @@ public class IdGen {
 
         if (resultSet.next()) {
             String currentId = resultSet.getString(1);
-            String newId = null;
-            int index = 0;
-            for (int i = currentId.length(); i >= 0; i--) {
-                if (!Character.isDigit(currentId.charAt(i - 1))) {
-                    index = i;
-                    break;
-                }
-            }
-            int newNum = Integer.parseInt(currentId.substring(index));
-            newNum++;
-            if (String.valueOf(newNum).length() == 1) {
-                newId = prefix + "00000" + newNum;
-            } else if (String.valueOf(newNum).length() == 2) {
-                newId = prefix + "0000" + newNum;
-            } else if (String.valueOf(newNum).length() == 3) {
-                newId = prefix + "000" + newNum;
-            } else if (String.valueOf(newNum).length() == 4) {
-                newId = prefix + "00" + newNum;
-            } else if (String.valueOf(newNum).length() == 5) {
-                newId = prefix + "0" + newNum;
-            } else {
-                newId = prefix + newNum;
-            }
-            return newId;
+            return getNextId(currentId, prefix);
         }
 
         return prefix + "000001";
+    }
+
+    public static String getNextId(String currentId, String prefix) {
+        String newId = null;
+        int index = 0;
+        for (int i = currentId.length(); i >= 0; i--) {
+            if (!Character.isDigit(currentId.charAt(i - 1))) {
+                index = i;
+                break;
+            }
+        }
+        int newNum = Integer.parseInt(currentId.substring(index));
+        newNum++;
+        if (String.valueOf(newNum).length() == 1) {
+            newId = prefix + "00000" + newNum;
+        } else if (String.valueOf(newNum).length() == 2) {
+            newId = prefix + "0000" + newNum;
+        } else if (String.valueOf(newNum).length() == 3) {
+            newId = prefix + "000" + newNum;
+        } else if (String.valueOf(newNum).length() == 4) {
+            newId = prefix + "00" + newNum;
+        } else if (String.valueOf(newNum).length() == 5) {
+            newId = prefix + "0" + newNum;
+        } else {
+            newId = prefix + newNum;
+        }
+        return newId;
     }
 
 }

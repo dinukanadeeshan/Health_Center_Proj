@@ -5,16 +5,22 @@
  */
 package com.unicorn.co226.ui.examination;
 
+import com.unicorn.co226.controller.DrugController;
+import com.unicorn.co226.model.Drug;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
  * @author yeshan
  */
 public class ExaminationForm extends javax.swing.JDialog {
+    private List<Drug> list;
 
     /**
      * Creates new form ExaminationForm
@@ -23,6 +29,18 @@ public class ExaminationForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setResizable(false);
+        try {
+            list = DrugController.getAllDrugs();
+            for (Drug drg : list) {
+                drugCmbBox.addItem(drg);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ExaminationForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ExaminationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AutoCompleteDecorator.decorate(drugCmbBox);
+        
     }
 
     /**
@@ -55,7 +73,7 @@ public class ExaminationForm extends javax.swing.JDialog {
         diseaseDescriptionText = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        drugBox = new javax.swing.JComboBox();
+        drugCmbBox = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         addButton = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -184,9 +202,8 @@ public class ExaminationForm extends javax.swing.JDialog {
         jLabel10.setText(" Admit");
         jLabel10.setOpaque(true);
 
-        drugBox.setEditable(true);
-        drugBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        drugBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        drugCmbBox.setEditable(true);
+        drugCmbBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -292,7 +309,7 @@ public class ExaminationForm extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(drugBox, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(drugCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(addButton))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -371,7 +388,7 @@ public class ExaminationForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(drugBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(drugCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7))
                     .addComponent(addButton))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,7 +487,7 @@ public class ExaminationForm extends javax.swing.JDialog {
     private javax.swing.JTextArea diseaseDescriptionText;
     private javax.swing.JTextArea doctorDescriptionText;
     private javax.swing.JTextField doctorText;
-    private javax.swing.JComboBox drugBox;
+    private javax.swing.JComboBox drugCmbBox;
     private javax.swing.JTable drugTable;
     private javax.swing.JTable histryTable;
     private javax.swing.JTextField idText;

@@ -5,10 +5,16 @@
  */
 package com.unicorn.co226.ui.drug;
 
+import com.unicorn.co226.controller.DrugController;
+import com.unicorn.co226.model.Drug;
+import com.unicorn.co226.other.IdGen;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +22,31 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class AddDrugForm extends javax.swing.JDialog {
 
+    private String curId;
+    private DefaultTableModel drugTableModel;
+
     /**
      * Creates new form AddDrugForm
      */
     public AddDrugForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try {
+            idTextField.setText(curId = IdGen.getNextId("Drug", "id", "D"));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        drugTableModel = (DefaultTableModel) drugTable.getModel();
+
+    }
+
+    private void nextId() {
+
+        idTextField.setText(IdGen.getNextId(curId, "D"));
+
     }
 
     /**
@@ -39,15 +64,16 @@ public class AddDrugForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        addBrandText = new javax.swing.JTextField();
+        brandText = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        addDiscriptionText = new javax.swing.JTextArea();
+        discriptionText = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         drugTable = new javax.swing.JTable();
         drugSaveButton = new javax.swing.JButton();
         drugCancelButton = new javax.swing.JButton();
         addToTableButton = new javax.swing.JButton();
+        idTextField = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,16 +108,16 @@ public class AddDrugForm extends javax.swing.JDialog {
         jLabel3.setText(" Brand");
         jLabel3.setOpaque(true);
 
-        addBrandText.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        brandText.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel4.setText(" Discription");
         jLabel4.setOpaque(true);
 
-        addDiscriptionText.setColumns(20);
-        addDiscriptionText.setRows(5);
-        jScrollPane1.setViewportView(addDiscriptionText);
+        discriptionText.setColumns(20);
+        discriptionText.setRows(5);
+        jScrollPane1.setViewportView(discriptionText);
 
         drugTable.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         drugTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -131,6 +157,14 @@ public class AddDrugForm extends javax.swing.JDialog {
         addToTableButton.setBackground(new java.awt.Color(204, 204, 255));
         addToTableButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         addToTableButton.setText("Add To Table");
+        addToTableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addToTableButtonActionPerformed(evt);
+            }
+        });
+
+        idTextField.setEditable(false);
+        idTextField.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,13 +187,16 @@ public class AddDrugForm extends javax.swing.JDialog {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(addBrandText, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(210, 210, 210)
+                                .addComponent(addToTableButton))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(addToTableButton)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(brandText, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                                    .addComponent(idTextField)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(2, 2, 2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -172,11 +209,13 @@ public class AddDrugForm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(addBrandText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(brandText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -207,12 +246,31 @@ public class AddDrugForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drugSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drugSaveButtonActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Drug> drugs = new ArrayList<>();
+        for (int i = 0; i < drugTable.getRowCount(); i++) {
+            Drug drug = new Drug((String) drugTableModel.getValueAt(i, 0), (String) drugTableModel.getValueAt(i, 1), (String) drugTableModel.getValueAt(i, 2));
+            drugs.add(drug);
+        }
+
+        try {
+            DrugController.addDrug(drugs);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_drugSaveButtonActionPerformed
 
     private void drugCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drugCancelButtonActionPerformed
         dispose();
     }//GEN-LAST:event_drugCancelButtonActionPerformed
+
+    private void addToTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToTableButtonActionPerformed
+        drugTableModel.addRow(new String[]{idTextField.getText(), brandText.getText(), discriptionText.getText()});
+        nextId();
+
+    }//GEN-LAST:event_addToTableButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,12 +325,13 @@ public class AddDrugForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addBrandText;
-    private javax.swing.JTextArea addDiscriptionText;
     private javax.swing.JButton addToTableButton;
+    private javax.swing.JTextField brandText;
+    private javax.swing.JTextArea discriptionText;
     private javax.swing.JButton drugCancelButton;
     private javax.swing.JButton drugSaveButton;
     private javax.swing.JTable drugTable;
+    private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -3,28 +3,44 @@ package com.unicorn.co226.controller;
 import com.unicorn.co226.db.DBConnection;
 import com.unicorn.co226.model.Doctor;
 import com.unicorn.co226.model.Drug;
+import java.sql.Array;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Project - HealthCenterProj
- * Created by Dinuka Nadeeshan on 8/31/16.
+ * Project - HealthCenterProj Created by Dinuka Nadeeshan on 8/31/16.
  * dinuka.nadeeshan1993@gmail.com
  */
 public class DrugController {
+
     public static int addDrug(Drug drug) throws SQLException, ClassNotFoundException {
         String query = "INSERT INTO drug VALUES(?,?,?)";
         PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(query);
 
-        statement.setString(1,drug.getId());
-        statement.setString(2,drug.getBrand());
-        statement.setString(3,drug.getDescription());
+        statement.setString(1, drug.getId());
+        statement.setString(2, drug.getBrand());
+        statement.setString(3, drug.getDescription());
 
         return statement.executeUpdate();
+    }
+
+    public static int addDrug(List<Drug> drugs) throws SQLException, ClassNotFoundException {
+        String query = "INSERT INTO drug VALUES(?,?,?)";
+        PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(query);
+
+        for (Drug drug : drugs) {
+            statement.setString(1, drug.getId());
+            statement.setString(2, drug.getBrand());
+            statement.setString(3, drug.getDescription());
+            statement.addBatch();
+        }
+
+        return Arrays.binarySearch(statement.executeBatch(),0);
     }
 
     public static List<Drug> getAllDrugs() throws SQLException, ClassNotFoundException {
@@ -32,7 +48,7 @@ public class DrugController {
 
         ResultSet rst = DBConnection.getInstance().getConnection().createStatement().executeQuery(query);
         List<Drug> drugList = new ArrayList<Drug>();
-        while (rst.next()){
+        while (rst.next()) {
             drugList.add(new Drug(rst.getString(1), rst.getString(2), rst.getString(3)));
         }
         return drugList;
