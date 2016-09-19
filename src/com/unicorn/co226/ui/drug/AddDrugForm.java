@@ -246,18 +246,26 @@ public class AddDrugForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drugSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drugSaveButtonActionPerformed
-        ArrayList<Drug> drugs = new ArrayList<>();
-        for (int i = 0; i < drugTable.getRowCount(); i++) {
-            Drug drug = new Drug((String) drugTableModel.getValueAt(i, 0), (String) drugTableModel.getValueAt(i, 1), (String) drugTableModel.getValueAt(i, 2));
-            drugs.add(drug);
-        }
-
-        try {
-            DrugController.addDrug(drugs);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+        int tblCount = drugTable.getRowCount();
+        if (tblCount>0) {
+            ArrayList<Drug> drugs = new ArrayList<>();
+            for (int i = 0; i < tblCount; i++) {
+                Drug drug = new Drug((String) drugTableModel.getValueAt(i, 0), (String) drugTableModel.getValueAt(i, 1), (String) drugTableModel.getValueAt(i, 2));
+                drugs.add(drug);
+            }
+            
+            try {
+                DrugController.addDrug(drugs);
+                
+                
+                for (int i = 0; i < tblCount; i++) {
+                    drugTableModel.removeRow(0);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AddDrugForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_drugSaveButtonActionPerformed
@@ -269,7 +277,8 @@ public class AddDrugForm extends javax.swing.JDialog {
     private void addToTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToTableButtonActionPerformed
         drugTableModel.addRow(new String[]{idTextField.getText(), brandText.getText(), discriptionText.getText()});
         nextId();
-
+        brandText.setText("");
+        discriptionText.setText("");
     }//GEN-LAST:event_addToTableButtonActionPerformed
 
     /**
